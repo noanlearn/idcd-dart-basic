@@ -1,6 +1,10 @@
-
 import 'package:belajar_dart/belajar_dart.dart' as belajar_dart;
 import 'dart:io';
+import 'animal.dart';
+import 'cat.dart';
+import 'bird.dart';
+import 'moveType.dart';
+import 'extensions.dart';
 
 /// belajar documentation comment [main]
 
@@ -49,8 +53,8 @@ void main(List<String> arguments) {
   // var piAsString = 3.14159.toStringAsFixed(2); // String piAsString = '3.14'
 
   // // STRINGS
-  print('"I think it\'s great!" I answered confidently');
-  print("Windows path: C:\\Program Files\\Dart");
+  // print('"I think it\'s great!" I answered confidently');
+  // print("Windows path: C:\\Program Files\\Dart");
   //
   // print('1 + 1 = ${ 1 + 1 }');
   // print(r'Dia baru saja membeli komputer seharga $1,000.00');
@@ -319,10 +323,66 @@ void main(List<String> arguments) {
   // var mapValues = capital.values;
   // capital['New Delhi'] = 'India'; // nambah baru
 
+  // // OOP
+  // // Cat
+  // var dicodingCat =  Cat('', 2, 3.9, 'Three coloured black-grey-white')
+  //   ..name = 'Cuci'
+  //   ..walk();
 
+  // dicodingCat.eat();
+  // print(dicodingCat.weight);
+  // dicodingCat.sleep();
+  // dicodingCat.poop();
+  // print(dicodingCat.weight);
+
+  // // Bird
+  // var dicodingCat =  Bird('', 2, 3.9, 'Three coloured black-grey-white')
+  //   ..name = 'Beo'
+  //   ..fly();
+
+  // // ENUMERATED TYPES
+  // print(Rainbow.values);
+  // print(Rainbow.violet);
+  // print(Rainbow.violet.name);
+  // print(Rainbow.green.index);
+
+  // var weatherForecast;
+  // switch(weatherForecast) {
+  //   case Weather.sunny :
+  //     print('Today\'s weather forecast is sunny');
+  //     break;
+  //   case Weather.cloudy :
+  //     print('Today\'s weather forecast is cloudy');
+  //     break;
+  //   case Weather.rain :
+  //     print('Today\'s weather forecast is rain');
+  //     break;
+  //   case Weather.storm :
+  //     print('Today\'s weather forecast is storm');
+  //     break;
+  // }
+
+  // print(Weather.rain.rainAmount);
+  // print(Weather.cloudy);
+
+  // var cuci = Cat();
+  // cuci.walk();
+
+  // // MIXIN
+  // var arielNoah = Musician();
+  // arielNoah.perform();
+
+  // EXTENSION METHOD
+  var unsortedNumbers = [2, 5, 3, 1, 4];
+  print(unsortedNumbers);
+
+  var sortedNumbers = unsortedNumbers.sortAsc();
+  print(sortedNumbers);
 
 
 }
+
+
 
 void greet(String name, int age) {
   var birthYear = 2022 - age;
@@ -358,4 +418,47 @@ String calculatedScore (num nilai) {
     return 'F';
   }
 }
+
+enum Rainbow {
+  red, orange, yellow, green, blue, indigo, violet
+}
+
+enum Weather {
+  sunny(15), cloudy(34), rain(69), storm(83);
+
+  final int rainAmount;
+  const Weather(this.rainAmount);
+
+  @override
+  String toString() => "Today's weather forecast is $name with a $rainAmount% chance of rain";
+}
+
+abstract class Performer {
+  void perform();
+}
+
+mixin Dancer implements Performer {
+  @override
+  void perform() {
+    print('Dancing');
+    // TODO: implement perform
+  }
+}
+
+mixin Singer implements Performer {
+  @override
+  void perform() {
+    print('Singing');
+  }
+}
+
+class Musician extends Performer with Dancer, Singer {
+  @override
+  void showTime() {
+    perform();
+  }
+}
+
+
+
 
