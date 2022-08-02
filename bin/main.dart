@@ -1,4 +1,5 @@
 import 'package:belajar_dart/belajar_dart.dart' as belajar_dart;
+import 'package:test/test.dart';
 import 'dart:io';
 import 'animal.dart';
 import 'cat.dart';
@@ -10,7 +11,8 @@ import 'extensions.dart';
 
 const num pi = 3.14;
 
-void main(List<String> arguments) {
+void main(List<String> arguments ) async {
+// void main(String message, Function sum) {
   // var greetings = 'Hello Dart!';
   // String greetings = 'Hello Dart!';
   // print(greetings);
@@ -25,6 +27,11 @@ void main(List<String> arguments) {
   // print(x);
 
   // // INPUT USER
+  // for (int i = 1; i <= 3; i++) {
+  //   for (int j = 1; j <= i; j++) {
+  //     stdout.write(j);
+  //   }
+  // }
   // stdout.write('Nama Anda : ');
   // String name = stdin.readLineSync()!;
   // stdout.write('Umur Anda : ');
@@ -94,7 +101,7 @@ void main(List<String> arguments) {
   //
   // try  {
   //   var a = 7;
-  //   var b = 0;
+  //   var b = 2;
   //   print(a ~/ b);
   // } catch (e,s) {
   //   print('Exception happened: $e');
@@ -372,12 +379,87 @@ void main(List<String> arguments) {
   // var arielNoah = Musician();
   // arielNoah.perform();
 
-  // EXTENSION METHOD
-  var unsortedNumbers = [2, 5, 3, 1, 4];
-  print(unsortedNumbers);
+  // // EXTENSION METHOD
+  // var unsortedNumbers = [2, 5, 3, 1, 4];
+  // print(unsortedNumbers);
+  //
+  // var sortedAscNumbers = unsortedNumbers.sortAsc();
+  // print(sortedAscNumbers);
+  //
+  // var sortedDescNumbers = unsortedNumbers.sortDesc();
+  // print(sortedDescNumbers);
 
-  var sortedNumbers = unsortedNumbers.sortAsc();
-  print(sortedNumbers);
+  // // FUNCTIONAL PROGRAMMING
+  // print(fibonacci(7));
+
+  // // ANONYMOUS FUNVTION / LAMBDA (nameless function)
+  // var sum (int num1, int num2) {
+  //   return num1 + num2;
+  // };
+  //
+  // Function sum = (int num1, int num2) => num1 + num2;
+
+  // Function printLambda = () {
+  //   print("This is lambda function");
+  // };
+
+  // Function printLambda = () => print("This is lambda function using fat arrow");
+  //
+  // printLambda();
+  // print(sum(2,4))
+
+  // // HIGHER ORDER FUNCTION
+  // void myHigherOrderFunction (String message, int Function(int num1, int num2) sum) {
+  //   print(message);
+  //   print(sum(7,4));
+  // }
+  //
+  // myHigherOrderFunction('hallo ges', sum);
+
+  // // CLOSURE
+  // var closureExample = calculate(7);
+  //
+  // closureExample();
+  
+  // // FUTURE FOR ASYNCHRONOUS
+  // final myFuture = Future(() {
+  //   print('Creating the future');
+  //   return 12;
+  // });
+  //
+  // print('main() is done');
+
+  // // FUTURE : COMPLETED WITH DATA
+  // getOrder().then((value) => print(value)); // cara ngambil return make then
+  
+  // FUTURE : COMPLETED WITH ERROR
+  // getOrder().then((value) => print(value)).catchError((error) { // catchError
+  //   print('Sorry $error');
+  // });
+
+  // // FUTURE (lengkap)
+  // getOrder().then((value) {
+  //   print('You ordered: $value');
+  // })
+  //     .catchError((error) {
+  //   print('Sorry. $error');
+  // })
+  //     .whenComplete(() { // tambahan untuk nambahin method klo udah selesai
+  //   print('Thank you');
+  // });
+  
+  print('Getting your order...');
+
+  try {
+    var order = await getOrder(); // Future with async (on main() async program) and await with future
+    print('You order: $order');
+  } catch (error) {
+    print('Sorry. $error');
+  } finally {
+    print('Thank you');
+  }
+
+
 
 
 }
@@ -460,5 +542,30 @@ class Musician extends Performer with Dancer, Singer {
 }
 
 
+int fibonacci(n) {
+  if (n <= 0) {
+    return 0;
+  } else if(n == 1) {
+    return 1;
+  } else {
+    return fibonacci(n - 1) + fibonacci(n - 2);
+  }
+}
 
+Function calculate(base) {
+  var count = 1;
 
+  return () => print('Value is ${base + count++}');
+}
+
+Future<String> getOrder() {
+  return Future.delayed(Duration(seconds: 3), () {
+    var isStockAvailable = false    ;
+    if (isStockAvailable) {
+      return 'Coffee Boba';
+    } else {
+      throw 'run out of stock';
+    }
+
+  });
+}

@@ -21,6 +21,26 @@ extension Sorting on List<int> {
     return list;
 
   }
+
+  List<int> sortDesc() {
+    var list = this;
+    var length = this.length;
+
+    for(int i = 0; i < length - 1 ; i++) {
+      int max = i;
+      for(int j = i + 1 ; j < length; j++) {
+        if(list[j] > list[max]) {
+          max = j;
+        }
+      }
+
+      int tmp = list[max];
+      list[max] = list[i];
+      list[i] = tmp;
+
+    }
+    return list;
+  }
 }
 
 
